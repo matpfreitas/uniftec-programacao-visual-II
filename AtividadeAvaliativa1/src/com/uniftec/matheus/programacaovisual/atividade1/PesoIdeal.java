@@ -79,26 +79,33 @@ public class PesoIdeal extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object origem = e.getSource();
+
         if (origem == btnCalc) {
             if (txtHeight.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "É necessário informar uma altura", "ERRO", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(
+                        null,
+                        "É necessário informar uma altura",
+                        "ERRO", JOptionPane.ERROR_MESSAGE);
                 txtHeight.requestFocus();
-            } else {
 
+            } else {
                 float height, weight;
                 String gender;
 
                 try {
-
                     height = Float.parseFloat(txtHeight.getText().toString());
                     gender = cboGender.getSelectedItem().toString();
 
                     if (gender.equals("Masculino")) {
+
                         weight = (float) (72.6 * height) - 58;
                         lblResult.setText("Resultado: O peso ideal é " + weight + "kg");
+
                     } else if (gender.equals("Feminino")) {
+
                         weight = (float) ((62.1 * height) - 44.7);
                         lblResult.setText("Resultado: O peso ideal é " + weight + "kg");
+
                     }
 
                 } catch (Exception exception) {
@@ -109,6 +116,7 @@ public class PesoIdeal extends JFrame implements ActionListener {
                             JOptionPane.ERROR_MESSAGE);
                     txtHeight.requestFocus();
                     txtHeight.selectAll();
+
                 }
             }
 
@@ -116,6 +124,7 @@ public class PesoIdeal extends JFrame implements ActionListener {
             txtHeight.setText("");
             lblResult.setText("Resultado: ");
             txtHeight.requestFocus();
+
         } else if (origem == btnClose) {
             Object[] options = {"Sim", "Não"};
             int retorno = JOptionPane.showOptionDialog(
@@ -129,7 +138,6 @@ public class PesoIdeal extends JFrame implements ActionListener {
             if (retorno == 0) {
                 System.exit(0);
             }
-
         }
     }
 
