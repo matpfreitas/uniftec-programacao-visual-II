@@ -93,7 +93,105 @@ public class Calculadora extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent event) {
+
+        Object origin = event.getSource();
+
+        if (origin == btnCalc) {
+
+            if (txtValue1.getText().equals("")) {
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "É necessário informar o Valor 1",
+                        "ERRO", JOptionPane.ERROR_MESSAGE);
+                txtValue1.requestFocus();
+
+            } else if (txtValue2.getText().equals("")) {
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "É necessário informar o Valor 2",
+                        "ERRO", JOptionPane.ERROR_MESSAGE);
+                txtValue2.requestFocus();
+
+            } else {
+
+                float value1, value2, result;
+
+                try {
+
+                    value1 = Float.parseFloat(txtValue1.getText().toString());
+
+                    try {
+
+                        value2 = Float.parseFloat(txtValue2.getText().toString());
+
+                        if (rbAdd.isSelected()) {
+
+                            result = value1 + value2;
+
+                        } else if (rbSub.isSelected()) {
+
+                            result = value1 - value2;
+
+                        } else if (rbMult.isSelected()) {
+
+                            result = value1 * value2;
+
+                        } else if (rbDiv.isSelected()) {
+
+                            result = value1 / value2;
+
+                        } else {
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "Selecione uma operação!",
+                                    "ERRO",
+                                    JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+
+                        if (cbResult.isSelected()) {
+                            lblResult.setText("Resultado: " + result);
+                        } else {
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "Resultado: " + result,
+                                    "Resultado da Operação",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                        }
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Valor 2 inválido",
+                                "ERRO",
+                                JOptionPane.ERROR_MESSAGE);
+                        txtValue2.requestFocus();
+                        txtValue2.selectAll();
+                    }
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Valor 1 inválido",
+                            "ERRO",
+                            JOptionPane.ERROR_MESSAGE);
+                    txtValue1.requestFocus();
+                    txtValue1.selectAll();
+                }
+
+            }
+
+        } else if (origin == btnClean) {
+
+            txtValue1.setText("");
+            txtValue2.setText("");
+            lblResult.setText("Resultado:");
+            txtValue1.requestFocus();
+
+        }
 
     }
 
