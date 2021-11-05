@@ -85,12 +85,11 @@ public class CustomerFeedback extends JFrame implements ActionListener {
         Container container = getContentPane();
         container.add(pnlCustomerFeedback);
 
-
         suggestionsArea.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent event) {
                 if (event.isPopupTrigger())
-                menuPopup.show(event.getComponent(),event.getX(),event.getY());
+                    menuPopup.show(event.getComponent(), event.getX(), event.getY());
             }
         });
 
@@ -103,11 +102,60 @@ public class CustomerFeedback extends JFrame implements ActionListener {
 
         if (origin == btnVerify) {
 
-            service1 = Float.parseFloat(cboService1.getSelectedItem().toString());
+            float service1, service2, average;
 
+            service1 = Float.parseFloat(cboService1.getSelectedItem().toString());
+            service2 = Float.parseFloat(cboService2.getSelectedItem().toString());
+
+            average = (service1 + service2) / 2;
+
+            if (average >= 4) {
+
+                String messageText = "Parabéns pelo atendimento!";
+
+                if (!suggestionsArea.getText().equals("")) {
+
+                    messageText = messageText + "\nMotivo: " + suggestionsArea.getText().toString();
+                }
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        messageText,
+                        "Avaliação do Atendimento",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else if ((average >= 2) && (average < 4)) {
+
+                String messageText = "Atendimento Regular!";
+
+                if (!suggestionsArea.getText().equals("")) {
+
+                    messageText = messageText + "\nMotivo: " + suggestionsArea.getText().toString();
+                }
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        messageText,
+                        "Avaliação do Atendimento",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+
+                String messageText = "Melhorar urgentemente o atendimento!";
+
+                if (!suggestionsArea.getText().equals("")) {
+
+                    messageText = messageText + "\nMotivo: " + suggestionsArea.getText().toString();
+                }
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        messageText,
+                        "Avaliação do Atendimento",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
 
         } else if (origin == itemCleanPopup) {
-
+            suggestionsArea.setText("");
+            suggestionsArea.requestFocus();
         }
 
     }
